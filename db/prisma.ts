@@ -1,7 +1,7 @@
-import { Pool, neonConfig } from '@neondatabase/serverless';
-import { PrismaNeon } from '@prisma/adapter-neon';
-import { PrismaClient } from '@prisma/client';
-import ws from 'ws';
+import { Pool, neonConfig } from "@neondatabase/serverless";
+import { PrismaNeon } from "@prisma/adapter-neon";
+import { PrismaClient } from "@prisma/client";
+import ws from "ws";
 
 // Sets up WebSocket connections, which enables Neon to use WebSocket communication.
 neonConfig.webSocketConstructor = ws;
@@ -30,3 +30,8 @@ export const prisma = new PrismaClient({ adapter }).$extends({
     },
   },
 });
+
+// Since $extends modifies how Prisma processes results, every time you query the product model, Prisma:
+// 1. Fetches the original price and rating from the database.
+// 2. Runs the compute() function to convert them into strings.
+// 3. Returns the transformed object instead of the raw database values.
