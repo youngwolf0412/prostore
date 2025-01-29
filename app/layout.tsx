@@ -11,6 +11,9 @@ export const metadata: Metadata = {
     template: `%s | ${APP_NAME}`,
     default: APP_NAME,
   },
+  icons: {
+    icon: "favicon.ico",
+  },
   description: APP_DESCRIPTION,
   metadataBase: new URL(SERVER_URL),
 };
